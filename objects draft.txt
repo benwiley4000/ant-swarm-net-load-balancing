@@ -1,0 +1,11 @@
+Objects:
+
+Ant
+fields: age
+
+Node
+fields: max-load, current-load, p-table (2d), neighbor-list, ant-list
+
+list of calls
+
+graph full of nodes (represented as adjacency list)
