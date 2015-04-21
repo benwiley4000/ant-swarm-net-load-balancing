@@ -1,7 +1,7 @@
 Objects:
 
 Ant
-fields: age
+fields: age, source, dest
 
 Node
 fields: max-load, current-load, p-table (2d), neighbor-list, ant-list
