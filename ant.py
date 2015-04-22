@@ -26,6 +26,7 @@ class Ant:
         
         self.source = source
         self.dest = dest
+        self.prev = None
         self.age = 0
     
     
