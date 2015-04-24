@@ -33,10 +33,19 @@ def route_call(source, dest, adj_list):
     return [source, dest]
 
 def main():
-    noise = .05
     random.seed()
+    
     adj_list = []
-    #initialize graph
+    """
+    initialize graph by reading in file.
+    assumes graph nodes are numbered 0, 1, ... n-1.
+    line l (numbered 1, 2, ... n) contains neighbors for node l - 1.
+    """
+    with open('adjacency-list.txt') as f:
+    	for line in f:
+    		adj_list.append( Node( len( adj_list ), len( f ), line.split() )
+	
+    
     #iterate through initialization and nodes
         #send_ant(noise prob, node.p_table, ant.age + length)
             #this updates p_table

@@ -31,6 +31,7 @@ class Node:
         self.num = num
         self.net_size = net_size
         self.neighbors = neighbors
+        self.max_load = MAX_LOAD
         self.load = 0
         self.ants = []
         self.delayed = []
@@ -57,7 +58,7 @@ class Node:
         """ if the ant has arrived at its destination, let it die """
         if self.num != ant.dest:
             
-            delay = round(80 * math.exp(-.075 * (MAX_LOAD - self.load)))
+            delay = round(80 * math.exp(-.075 * (self.max_load - self.load)))
             
             if delay == 0:
                 
