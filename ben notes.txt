@@ -1,0 +1,6 @@
+BEN’S NOTES
+Program for graphs is called Cytoscape
+Current todo:
+-Write code to clone list and remove duplicates
+-Write code to output gml graph code at each 100 ticks
+-Track edge and node weights at each tick
