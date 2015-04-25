@@ -12,7 +12,7 @@ class Node:
     A network node to be traversed by ants and calls.
     """
     
-    MAX_LOAD = 100
+    MAX_LOAD = 40
     NOISE = .05
     
     def __init__(self, num, net_size, *neighbors):
