@@ -180,6 +180,8 @@ class Node:
                 
             i -= 1
                 
+        self.new_ant()
+        
         return migrants
     
     def tick(self):
