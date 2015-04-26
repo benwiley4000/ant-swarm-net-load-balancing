@@ -1,0 +1,55 @@
+black: #000000
+green: #CCFF99
+yellow: #FFFF99
+orange: #FFCC66
+red: #FF9999
+
+<node id="89" label="2">
+  <att name="name" value="2" type="string"/>
+  <graphics outline="#000000" h="40.0" w="40.0" x="69.30032696146709" y="-323.0966304359938" fill="#FFCC66" type="ELLIPSE" width="4.0">
+    <att name="NODE_LABEL_COLOR" value="#000000" type="string"/>
+    <att name="NODE_LABEL_POSITION" value="C,C,c,0.00,0.00" type="string"/>
+    <att name="NODE_LABEL_FONT_SIZE" value="22" type="string"/>
+    <att name="NODE_LABEL" value="2" type="string"/>
+  </graphics>
+</node>
+
+graph [
+  node [
+    id 0
+    label “0”
+    graphics [
+      x xxx.xxx
+      y yyy.yyy
+      fill “#colorr”
+      w 40.0
+      h 40.0
+      type “Ellipse”
+      outline “#000000”
+      nodeFontSize 22
+      nodeLabelColor “#000000”
+    ]
+  ]
+  node [
+    id 1
+    label “1”
+    graphics [
+      x xxx.xxx
+      y yyy.yyy
+      fill “#colorr”
+      w 40.0
+      h 40.0
+      type “Ellipse”
+      outline “#000000”
+      nodeFontSize 22
+      nodeLabelColor “#000000”
+    ]
+  ]
+  edge [
+    source s
+    target t
+    graphics [
+      fill “#colorr”
+    ]
+  ]
+]

@@ -54,6 +54,88 @@ def end_call(route):
     for i in route:
 	adj_list[i].load -= 1
 
+def edge_load(a, b, call_paths):
+	load = 0
+	for call in call_paths:
+		prev = call[0]
+		i = 1
+		while i < len(call):
+			if (a == prev and b == call[i]) or (b == prev and a == call[i]):
+				load += 1
+			
+			prev = call[i]
+			i += 1
+	
+	return load
+
+def graph_out(adj_list, edge_list, coordinates, call_paths, t):
+	f = open("graph-" + t + "t.gml", 'w')
+	f.write("graph [\n")
+	i = 0
+	while i < len(adj_list):
+		f.write("\tnode [\n")
+		f.write("\t\tid " + i + "\n")
+		f.write("\t\tlabel \"" + i + "\"\n")
+		f.write("\t\tgraphics [\n")
+		f.write("\t\t\tx " + coordinates[i][0] + "\n")
+		f.write("\t\t\ty " + coordinates[i][1] + "\n")
+		
+		if adj_list[i].load < 10:
+			#green
+			f.write("\t\t\tfill \"#CCFF99\"\n")
+		elif adj_list[i].load < 20:
+			#yellow
+			f.write("\t\t\tfill \"#FFFF99\"\n")
+		elif adj_list[i].load < 30:
+			#orange
+			f.write("\t\t\tfill \"#FFCC66\"\n")
+		else:
+			#red
+			f.write("\t\t\tfill \"#CCFF99\"\n")
+		
+		f.write("\t\t\tw 40.0000\n")
+		f.write("\t\t\th 40.0000\n")
+		f.write("\t\t\ttype \"Ellipse\"\n")
+		f.write("\t\t\tnodeFontSize 22\n")
+		f.write("\t\t\toutline \"#000000\"\n")
+		f.write("\t\t\tnodeLabelColor \"#000000\"\n")
+		f.write("\t\t]\n")
+		f.write("\t]\n")
+		i += 1
+	
+	i = 0
+	while i < len(edge_list):
+		j = 0
+		while j < len(edge_list[i]):
+			f.write("\tedge [\n")
+			f.write("\t\tsource " + i + "\n")
+			f.write("\t\ttarget " + edge_list[i][j] + "\n")
+			f.write("\t\tgraphics [\n")
+			
+			load = edge_load(i, edge_list[i][j])
+			
+			if load < 10:
+				#green
+				f.write("\t\t\tfill \"#CCFF99\"\n")
+			elif load < 20:
+				#yellow
+				f.write("\t\t\tfill \"#FFFF99\"\n")
+			elif load < 30:
+				#orange
+				f.write("\t\t\tfill \"#FFCC66\"\n")
+			else:
+				#red
+				f.write("\t\t\tfill \"#CCFF99\"\n")
+			
+			f.write("\t\t]\n")
+			f.write("\t]\n")
+			j += 1
+		
+		i += 1
+	
+	f.write("]")
+	f.close()
+
 def main():
     random.seed()
     
@@ -65,7 +147,27 @@ def main():
     """
     with open('adjacency-list.txt') as f:
     	for line in f:
-    		adj_list.append( Node( len( adj_list ), len( f ), line.split() ))
+    		adj_list.append( Node( len( adj_list ), len( f ), tuple( line.split() ) ) )
+	
+	coordinates = open("coordinates.txt").readlines()
+	i = 0
+	while i < len(coordinates):
+		coordinates[i] = str(coordinates[i]).split()
+		i += 1
+	
+	#create adjacency list without duplicates
+	
+	adj_list_single = []
+	
+	for node in adj_list:
+		adj_list_single.append( list( node.neighbors ) )
+	
+	i = 0
+	while i < len(adj_list_single):
+		for n in adj_list_single[i]:
+			adj_list_single[n].remove(i)
+		
+		i += 1
 	
     
     for i in range(500):
