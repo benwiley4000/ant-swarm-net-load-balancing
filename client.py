@@ -8,6 +8,7 @@ import random
 __author__ = "Ben Wiley and Tommy Rhodes"
 __email__ = "bewiley@davidson.edu, torhodes@davidson.edu"
 
+"""
 def send_ant(noise, p_table, source):
     random.seed()
     rand = random.random()
@@ -26,6 +27,7 @@ def send_ant(noise, p_table, source):
 	copy[copy.index(max(copy))] == -1
     
     return
+"""
 
 def route_call(source, dest, adj_list):
     current_node = adj_list[source]
@@ -54,9 +56,9 @@ def end_call(route):
     for i in route:
 	adj_list[i].load -= 1
 
-def edge_load(a, b, call_paths):
+def edge_load(a, b, call_routes):
 	load = 0
-	for call in call_paths:
+	for call in call_routes:
 		prev = call[0]
 		i = 1
 		while i < len(call):
@@ -68,8 +70,8 @@ def edge_load(a, b, call_paths):
 	
 	return load
 
-def graph_out(adj_list, edge_list, coordinates, call_paths, t):
-	f = open("graph-" + t + "t.gml", 'w')
+def graph_out(adj_list, edge_list, coordinates, call_routes, t):
+	f = open("gif/graph-" + t + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -85,13 +87,16 @@ def graph_out(adj_list, edge_list, coordinates, call_paths, t):
 			f.write("\t\t\tfill \"#CCFF99\"\n")
 		elif adj_list[i].load < 20:
 			#yellow
-			f.write("\t\t\tfill \"#FFFF99\"\n")
+			f.write("\t\t\tfill \"#FFFF66\"\n")
 		elif adj_list[i].load < 30:
 			#orange
 			f.write("\t\t\tfill \"#FFCC66\"\n")
-		else:
+		elif adj_list[i].load < 40:
 			#red
-			f.write("\t\t\tfill \"#CCFF99\"\n")
+			f.write("\t\t\tfill \"FF9999\"\n")
+		else:
+			#violet
+			f.write("\t\t\tfill \"#FF99FF\"\n")
 		
 		f.write("\t\t\tw 40.0000\n")
 		f.write("\t\t\th 40.0000\n")
@@ -112,20 +117,23 @@ def graph_out(adj_list, edge_list, coordinates, call_paths, t):
 			f.write("\t\ttarget " + edge_list[i][j] + "\n")
 			f.write("\t\tgraphics [\n")
 			
-			load = edge_load(i, edge_list[i][j])
+			load = edge_load(i, edge_list[i][j], call_routes)
 			
 			if load < 10:
 				#green
 				f.write("\t\t\tfill \"#CCFF99\"\n")
 			elif load < 20:
 				#yellow
-				f.write("\t\t\tfill \"#FFFF99\"\n")
+				f.write("\t\t\tfill \"#FFFF66\"\n")
 			elif load < 30:
 				#orange
 				f.write("\t\t\tfill \"#FFCC66\"\n")
-			else:
+			elif load < 40:
 				#red
-				f.write("\t\t\tfill \"#CCFF99\"\n")
+				f.write("\t\t\tfill \"#FF9999\"\n")
+			else:
+				#violet
+				f.write("\t\t\tfill \"#FF99FF\"\n")
 			
 			f.write("\t\t]\n")
 			f.write("\t]\n")
@@ -157,55 +165,61 @@ def main():
 	
 	#create adjacency list without duplicates
 	
-	adj_list_single = []
+	edge_list = []
 	
 	for node in adj_list:
-		adj_list_single.append( list( node.neighbors ) )
+		edge_list.append( list( node.neighbors ) )
 	
 	i = 0
-	while i < len(adj_list_single):
-		for n in adj_list_single[i]:
-			adj_list_single[n].remove(i)
+	while i < len(edge_list):
+		for n in edge_list[i]:
+			edge_list[n].remove(i)
 		
 		i += 1
 	
     
     for i in range(500):
-	for node in range(len(adj_list)):
-	    break
-	    #send_ant(noise prob, node.p_table, ant.age + length)
-    call_list = []
-    call_ends = []
-    successful_call_list = []
-    lost_call_list = []
-    call_routes = []
-    call_prob = 0.9
-    call_prob_2 = 0.5
-    for i in range(10000):
-	if (1 - random.random() >= call_prob):
-	    call = start_call()
-	    result = route_call()
-	    if result == -1:
-		lost_call_list.append(call[0:2])
-	    else:
-		successful_call_list.append(call[0:2])
-		call_list.append(call[0:2])
-		call_ends.append(call[3])
-		call_routes.append(result)
-	else if (1 - random.random() >= call_prob_2):
-	    for i in range(2): 
-		call = start_call()
-		result = route_call()
-		if result == -1:
-		    lost_call_list.append(call[0:2])
-		else:
-		    successful_call_list.append(call[0:2])
-		    call_list.append(call[0:2])
-		    call_ends.append(call[3])
-		    call_routes.append(result)
-	while i in call_ends:
-	    index = call_ends.index(i)
-	    call_ends.pop(i)
-	    call_list.pop(i)
-	    end_call(call_routes.pop(i))
-        #send_ant(noise, node.p_table, dest)
+		for node in range(len(adj_list)):
+			break
+		#send_ant(noise prob, node.p_table, ant.age + length)
+		call_list = []
+		call_ends = []
+		successful_call_list = []
+		lost_call_list = []
+		call_routes = []
+		call_prob = 0.9
+		call_prob_2 = 0.5
+		for i in range(10000):
+			if i % 100 == 0:
+				graph_out(adj_list, edge_list, coordinates, call_routes, i)
+			
+			if 1 - random.random() >= call_prob:
+		    call = start_call()
+			    result = route_call()
+			    if result == -1:
+					lost_call_list.append(call[0:2])
+				
+			    else:
+					successful_call_list.append(call[0:2])
+					call_list.append(call[0:2])
+					call_ends.append(call[3])
+					call_routes.append(result)
+			
+			elif 1 - random.random() >= call_prob_2:
+			    for i in range(2): 
+					call = start_call()
+					result = route_call()
+					if result == -1:
+				    	lost_call_list.append(call[0:2])
+					else:
+				    	successful_call_list.append(call[0:2])
+				    	call_list.append(call[0:2])
+				    	call_ends.append(call[3])
+				    	call_routes.append(result)
+			
+			while i in call_ends:
+			    index = call_ends.index(i)
+				call_ends.pop(i)
+		 		call_list.pop(i)
+		  		end_call(call_routes.pop(i))
+		  		#send_ant(noise prob, node.p_table, ant.age + length)

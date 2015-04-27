@@ -1,8 +1,9 @@
 black: #000000
 green: #CCFF99
-yellow: #FFFF99
+yellow: #FFFF66
 orange: #FFCC66
 red: #FF9999
+violet: #FF99FF
 
 <node id="89" label="2">
   <att name="name" value="2" type="string"/>
