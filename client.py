@@ -48,6 +48,21 @@ def main():
 	for i in range(500):
 		move_ants(adj_list)
 	
+	for node in adj_list:
+		print "Node " + str(adj_list.index(node)) + " has " + str(len(node.ants)) + " ready and " + str(len(node.delayed)) + " delayed"
+		node.ants = []
+		node.delayed = []
+	print ""
+	
+	for node in adj_list:
+		print "NODE " + str(adj_list.index(node))
+		k = 0
+		while k < len(node.p_table):
+			print str(k) + " " + str(node.p_table[k])
+			k += 1
+		
+		print ""
+	
 	call_list = []
 	call_ends = []
 	successful_call_list = []
@@ -76,7 +91,7 @@ def main():
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
 				call_ends.append(call[2])
-				print "I am appending " + str(result)
+				#print "I am appending " + str(result)
 				call_routes.append(result)
 		
 		elif 1 - random.random() >= call_prob_2:
@@ -96,7 +111,7 @@ def main():
 					successful_call_list.append(call[0:2])
 			    	call_list.append(call[0:2])
 			    	call_ends.append(call[2])
-			    	print "I am appending " + str(result)
+			    	#print "I am appending " + str(result)
 			    	call_routes.append(result)
 		
 		while i in call_ends:
@@ -117,10 +132,13 @@ def route_call(source, dest, adj_list):
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:
+		#print "S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 		if current_node.max_load - current_node.load == 0:
 			for n in nodes:
 				adj_list[n].load -= 1
+			
 			return -1
+		
 		nodes.append(current_node.num)
 		current_node.load += 1
 		current_node = adj_list[current_node.neighbors[current_node.p_table[dest].index(max(current_node.p_table[dest]))]] #def recheck this later
@@ -144,14 +162,15 @@ def end_call(route):
 def edge_load(a, b, call_routes):
 	load = 0
 	for call in call_routes:
-		prev = call[0]
-		i = 1
-		while i < len(call):
-			if (a == prev and b == call[i]) or (b == prev and a == call[i]):
-				load += 1
-			
-			prev = call[i]
-			i += 1
+		if call != -1:#badfix! BETTER FIX NEEDED
+			prev = call[0]
+			i = 1
+			while i < len(call):
+				if (a == prev and b == call[i]) or (b == prev and a == call[i]):
+					load += 1
+				
+				prev = call[i]
+				i += 1
 	
 	return load
 
@@ -178,7 +197,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 			f.write("\t\t\tfill \"#FFCC66\"\n")
 		elif adj_list[i].load < 40:
 			#red
-			f.write("\t\t\tfill \"FF9999\"\n")
+			f.write("\t\t\tfill \"#FF9999\"\n")
 		else:
 			#violet
 			f.write("\t\t\tfill \"#FF99FF\"\n")
