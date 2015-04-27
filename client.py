@@ -8,26 +8,11 @@ import random
 __author__ = "Ben Wiley and Tommy Rhodes"
 __email__ = "bewiley@davidson.edu, torhodes@davidson.edu"
 
-"""
-def send_ant(noise, p_table, source):
-    random.seed()
-    rand = random.random()
-    next_node = -1
-    dest = int(random.randrange(len(adj_list)))
-    if rand >= noise: 
-        next_node = int(random.randrange(len(adj_list[source].neighbors)))
-	while next_node == source:
-	    next_node = int(random.randrange(len(adj_list[source].neighbors)))
-        return
-    rand = random.random()
-    copy = adj_list[source].p_table[dest][:]
-    while dest == -1:
-	if (1 - rand >= max(copy)):
-	    next_node = adj_list[source].neighbors[copy.index(max(copy))]
-	copy[copy.index(max(copy))] == -1
-    
-    return
-"""
+def move_ants(adj_list):
+	for node in adj_list:
+		migrants = node.get_migrants()
+		for migrant in migrants:
+			adj_list[migrant[1]].add(migrant[0])
 
 def route_call(source, dest, adj_list):
     current_node = adj_list[source]
@@ -179,47 +164,47 @@ def main():
 	
     
     for i in range(500):
-		for node in range(len(adj_list)):
-			break
-		#send_ant(noise prob, node.p_table, ant.age + length)
-		call_list = []
-		call_ends = []
-		successful_call_list = []
-		lost_call_list = []
-		call_routes = []
-		call_prob = 0.9
-		call_prob_2 = 0.5
-		for i in range(10000):
-			if i % 100 == 0:
-				graph_out(adj_list, edge_list, coordinates, call_routes, i)
+		move_ants(adj_list)
+	
+	call_list = []
+	call_ends = []
+	successful_call_list = []
+	lost_call_list = []
+	call_routes = []
+	call_prob = 0.9
+	call_prob_2 = 0.5
+	for i in range(10000):
+		if i % 100 == 0:
+			graph_out(adj_list, edge_list, coordinates, call_routes, i)
+		
+		if 1 - random.random() >= call_prob:
+	    call = start_call()
+		    result = route_call()
+		    if result == -1:
+				lost_call_list.append(call[0:2])
 			
-			if 1 - random.random() >= call_prob:
-		    call = start_call()
-			    result = route_call()
-			    if result == -1:
-					lost_call_list.append(call[0:2])
-				
-			    else:
-					successful_call_list.append(call[0:2])
-					call_list.append(call[0:2])
-					call_ends.append(call[3])
-					call_routes.append(result)
-			
-			elif 1 - random.random() >= call_prob_2:
-			    for i in range(2): 
-					call = start_call()
-					result = route_call()
-					if result == -1:
-				    	lost_call_list.append(call[0:2])
-					else:
-				    	successful_call_list.append(call[0:2])
-				    	call_list.append(call[0:2])
-				    	call_ends.append(call[3])
-				    	call_routes.append(result)
-			
-			while i in call_ends:
-			    index = call_ends.index(i)
-				call_ends.pop(i)
-		 		call_list.pop(i)
-		  		end_call(call_routes.pop(i))
-		  		#send_ant(noise prob, node.p_table, ant.age + length)
+		    else:
+				successful_call_list.append(call[0:2])
+				call_list.append(call[0:2])
+				call_ends.append(call[3])
+				call_routes.append(result)
+		
+		elif 1 - random.random() >= call_prob_2:
+		    for i in range(2): 
+				call = start_call()
+				result = route_call()
+				if result == -1:
+			    	lost_call_list.append(call[0:2])
+				else:
+			    	successful_call_list.append(call[0:2])
+			    	call_list.append(call[0:2])
+			    	call_ends.append(call[3])
+			    	call_routes.append(result)
+		
+		while i in call_ends:
+			index = call_ends.index(i)
+			call_ends.pop(i)
+			call_list.pop(i)
+			end_call(call_routes.pop(i))
+		
+		move_ants(adj_list)
