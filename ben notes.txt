@@ -4,3 +4,9 @@ Current todo:
 -Write code to clone list and remove duplicates
 -Write code to output gml graph code at each 100 ticks
 -Track edge and node weights at each tick
+
+Troubleshooting:
+-Check to make sure delay amount is correct
+-Check that ants are dropping pheromone at right time
+-calls are being ended correctly?
+-

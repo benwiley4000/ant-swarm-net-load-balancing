@@ -72,10 +72,11 @@ def main():
 	call_prob_2 = 0.5
 	
 	for i in range(10000):
+		#print lost_call_list
 		if i % 100 == 0:
 			graph_out(adj_list, edge_list, coordinates, call_routes, i)
 		
-		if 1 - random.random() >= call_prob:
+		if random.random() < call_prob:
 			call = start_call(i, adj_list)
 			
 			source = random.randint(0, len(adj_list) - 1)
@@ -84,18 +85,18 @@ def main():
 				dest = random.randint(0, len(adj_list) - 1)
 			
 			result = route_call(source, dest, adj_list)
-			if result == -1:
-				lost_call_list.append(call[0:2])
-			
-			else:
+			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
 				call_ends.append(call[2])
-				#print "I am appending " + str(result)
+				print "I am appending " + str(result) + " (" + str(source) + ", " + str(dest) + ")"
 				call_routes.append(result)
+			
+			else:
+				lost_call_list.append(call[0:2])
 		
-		elif 1 - random.random() >= call_prob_2:
-		    for i in range(2): 
+		elif random.random() < call_prob_2:
+		    for k in range(2): 
 				call = start_call(i, adj_list)
 				
 				source = random.randint(0, len(adj_list) - 1)
@@ -104,15 +105,15 @@ def main():
 					dest = random.randint(0, len(adj_list) - 1)
 				
 				result = route_call(source, dest, adj_list)
-				if result == -1:
-					lost_call_list.append(call[0:2])
+				if result:
+					successful_call_list.append(call[0:2])
+					call_list.append(call[0:2])
+					call_ends.append(call[2])
+					print "I am appending " + str(result) + " (" + str(source) + ", " + str(dest) + ")"
+					call_routes.append(result)
 				
 				else:
-					successful_call_list.append(call[0:2])
-			    	call_list.append(call[0:2])
-			    	call_ends.append(call[2])
-			    	#print "I am appending " + str(result)
-			    	call_routes.append(result)
+					lost_call_list.append(call[0:2])
 		
 		while i in call_ends:
 			index = call_ends.index(i)
@@ -137,11 +138,22 @@ def route_call(source, dest, adj_list):
 			for n in nodes:
 				adj_list[n].load -= 1
 			
-			return -1
+			return None
 		
 		nodes.append(current_node.num)
 		current_node.load += 1
 		current_node = adj_list[current_node.neighbors[current_node.p_table[dest].index(max(current_node.p_table[dest]))]] #def recheck this later
+	
+	#print "S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
+	if current_node.max_load - current_node.load == 0:
+		for n in nodes:
+			adj_list[n].load -= 1
+		
+		return None
+	
+	nodes.append(current_node.num)
+	current_node.load += 1
+	current_node = adj_list[current_node.neighbors[current_node.p_table[dest].index(max(current_node.p_table[dest]))]] #def recheck this later
 	
 	return nodes
 
@@ -162,15 +174,14 @@ def end_call(route):
 def edge_load(a, b, call_routes):
 	load = 0
 	for call in call_routes:
-		if call != -1:#badfix! BETTER FIX NEEDED
-			prev = call[0]
-			i = 1
-			while i < len(call):
-				if (a == prev and b == call[i]) or (b == prev and a == call[i]):
-					load += 1
-				
-				prev = call[i]
-				i += 1
+		prev = call[0]
+		i = 1
+		while i < len(call):
+			if (a == prev and b == call[i]) or (b == prev and a == call[i]):
+				load += 1
+			
+			prev = call[i]
+			i += 1
 	
 	return load
 
