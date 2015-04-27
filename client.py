@@ -1,12 +1,96 @@
 #!/usr/bin/env python
-from ant import ant
-from node import node
+from ant import Ant
+from node import Node
 import random
 
 """Client code for Artificial Intelligence Final (Ant-Based Load Balancing)"""
 
 __author__ = "Ben Wiley and Tommy Rhodes"
 __email__ = "bewiley@davidson.edu, torhodes@davidson.edu"
+
+def main():
+	print("Got here!")
+	random.seed()
+	
+	adj_list = []
+	"""
+	initialize graph by reading in file.
+	assumes graph nodes are numbered 0, 1, ... n-1.
+	line l (numbered 1, 2, ... n) contains neighbors for node l - 1.
+	"""
+	with open('adjacency-list.txt') as f:
+		for line in f:
+			adj_list.append( Node( len( adj_list ), len( f ), tuple( line.split() ) ) )
+	
+	coordinates = open("coordinates.txt").readlines()
+	i = 0
+	while i < len(coordinates):
+		coordinates[i] = str(coordinates[i]).split()
+		i += 1
+	
+	#create adjacency list without duplicates
+	
+	edge_list = []
+	
+	for node in adj_list:
+		edge_list.append( list( node.neighbors ) )
+	
+	i = 0
+	while i < len(edge_list):
+		for n in edge_list[i]:
+			edge_list[n].remove(i)
+		
+		i += 1
+	
+	
+	for i in range(500):
+		move_ants(adj_list)
+	
+	call_list = []
+	call_ends = []
+	successful_call_list = []
+	lost_call_list = []
+	call_routes = []
+	call_prob = 0.9
+	call_prob_2 = 0.5
+	
+	print("Got here!")
+	
+	for i in range(10000):
+		if i % 100 == 0:
+			graph_out(adj_list, edge_list, coordinates, call_routes, i)
+		
+		if 1 - random.random() >= call_prob:
+			call = start_call()
+			result = route_call()
+			if result == -1:
+				lost_call_list.append(call[0:2])
+			
+			else:
+				successful_call_list.append(call[0:2])
+				call_list.append(call[0:2])
+				call_ends.append(call[3])
+				call_routes.append(result)
+		
+		elif 1 - random.random() >= call_prob_2:
+		    for i in range(2): 
+				call = start_call()
+				result = route_call()
+				if result == -1:
+					lost_call_list.append(call[0:2])
+				else:
+					successful_call_list.append(call[0:2])
+			    	call_list.append(call[0:2])
+			    	call_ends.append(call[3])
+			    	call_routes.append(result)
+		
+		while i in call_ends:
+			index = call_ends.index(i)
+			call_ends.pop(i)
+			call_list.pop(i)
+			end_call(call_routes.pop(i))
+		
+		move_ants(adj_list)
 
 def move_ants(adj_list):
 	for node in adj_list:
@@ -15,31 +99,31 @@ def move_ants(adj_list):
 			adj_list[migrant[1]].add(migrant[0])
 
 def route_call(source, dest, adj_list):
-    current_node = adj_list[source]
-    nodes = []
-    while current_node.num != dest:
-        if current_node.max_load - current_load.load == 0:
-            for i in range(len(nodes)):
-                adj_list[i].load -= 1
-            return -1
-        nodes.append(current_node.num)
-        current_node.load += 1
+	current_node = adj_list[source]
+	nodes = []
+	while current_node.num != dest:
+		if current_node.max_load - current_load.load == 0:
+			for i in range(len(nodes)):
+				adj_list[i].load -= 1
+			return -1
+		nodes.append(current_node.num)
+		current_node.load += 1
 	current_node = adj_list[current_node.neighbors[current_node.p_table[current_node.num].max(current_node.p_table[current_node.num])]] #def recheck this later
-    return nodes
+	return nodes
 
 def start_call(tick):
-    source = int(random.randrange(len(adj_list)))
-    dest = source
-    while dest == source:
-	dest = int(random.randrange(len(adj_list)))
-    length = -1
-    while length < 0:
-	length = random.gauss(170, 20)
-    return [source, dest, length + tick]
+	source = int(random.randrange(len(adj_list)))
+	dest = source
+	while dest == source:
+		dest = int(random.randrange(len(adj_list)))
+		length = -1
+	while length < 0:
+		length = random.gauss(170, 20)
+	return [source, dest, length + tick]
 
 def end_call(route):
-    for i in route:
-	adj_list[i].load -= 1
+	for i in route:
+		adj_list[i].load -= 1
 
 def edge_load(a, b, call_routes):
 	load = 0
@@ -74,7 +158,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 			#yellow
 			f.write("\t\t\tfill \"#FFFF66\"\n")
 		elif adj_list[i].load < 30:
-			#orange
+		#orange
 			f.write("\t\t\tfill \"#FFCC66\"\n")
 		elif adj_list[i].load < 40:
 			#red
@@ -128,83 +212,3 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-
-def main():
-    random.seed()
-    
-    adj_list = []
-    """
-    initialize graph by reading in file.
-    assumes graph nodes are numbered 0, 1, ... n-1.
-    line l (numbered 1, 2, ... n) contains neighbors for node l - 1.
-    """
-    with open('adjacency-list.txt') as f:
-    	for line in f:
-    		adj_list.append( Node( len( adj_list ), len( f ), tuple( line.split() ) ) )
-	
-	coordinates = open("coordinates.txt").readlines()
-	i = 0
-	while i < len(coordinates):
-		coordinates[i] = str(coordinates[i]).split()
-		i += 1
-	
-	#create adjacency list without duplicates
-	
-	edge_list = []
-	
-	for node in adj_list:
-		edge_list.append( list( node.neighbors ) )
-	
-	i = 0
-	while i < len(edge_list):
-		for n in edge_list[i]:
-			edge_list[n].remove(i)
-		
-		i += 1
-	
-    
-    for i in range(500):
-		move_ants(adj_list)
-	
-	call_list = []
-	call_ends = []
-	successful_call_list = []
-	lost_call_list = []
-	call_routes = []
-	call_prob = 0.9
-	call_prob_2 = 0.5
-	for i in range(10000):
-		if i % 100 == 0:
-			graph_out(adj_list, edge_list, coordinates, call_routes, i)
-		
-		if 1 - random.random() >= call_prob:
-	    call = start_call()
-		    result = route_call()
-		    if result == -1:
-				lost_call_list.append(call[0:2])
-			
-		    else:
-				successful_call_list.append(call[0:2])
-				call_list.append(call[0:2])
-				call_ends.append(call[3])
-				call_routes.append(result)
-		
-		elif 1 - random.random() >= call_prob_2:
-		    for i in range(2): 
-				call = start_call()
-				result = route_call()
-				if result == -1:
-			    	lost_call_list.append(call[0:2])
-				else:
-			    	successful_call_list.append(call[0:2])
-			    	call_list.append(call[0:2])
-			    	call_ends.append(call[3])
-			    	call_routes.append(result)
-		
-		while i in call_ends:
-			index = call_ends.index(i)
-			call_ends.pop(i)
-			call_list.pop(i)
-			end_call(call_routes.pop(i))
-		
-		move_ants(adj_list)
