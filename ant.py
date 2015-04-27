@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Code for Ant class of Ant-Based Load Balancing."""
 
 """ imports here? """

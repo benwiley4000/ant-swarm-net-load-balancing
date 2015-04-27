@@ -1,8 +1,8 @@
-#!/usr/bin/env python
-
 """Code for Node class of Ant-Based Load Balancing."""
 
 import random
+import math
+from ant import Ant
 
 __author__ = "Ben Wiley and Tommy Rhodes"
 __email__ = "bewiley@davidson.edu, torhodes@davidson.edu"
@@ -15,7 +15,7 @@ class Node:
     MAX_LOAD = 40
     NOISE = .05
     
-    def __init__(self, num, net_size, *neighbors):
+    def __init__(self, num, net_size, neighbors):
         """
         Node Constructor.
         
@@ -30,15 +30,22 @@ class Node:
         
         self.num = num
         self.net_size = net_size
+        
+        i = 0
+        while i < len(neighbors):
+        	neighbors[i] = int(neighbors[i])
+        	i += 1
+        
         self.neighbors = neighbors
-        self.max_load = MAX_LOAD
+        
+        self.max_load = Node.MAX_LOAD
         self.load = 0
         self.ants = []
         self.delayed = []
         
         self.p_table = []
         for i in range(0, net_size):
-            p_table.append((1.0/len(neighbors),) * len(neighbors))
+            self.p_table.append([1.0/len(neighbors),] * len(neighbors))
         
         self.new_ant()
     
@@ -66,7 +73,7 @@ class Node:
             
             else:
                 
-                self.delayed.append((ant, delay))
+                self.delayed.append([ant, delay])
     
     def add_ant(self, ant):
     	"""
@@ -91,7 +98,7 @@ class Node:
         for k in range(0, j):
             self.p_table[i][k] = (self.p_table[i][k]) / (1.0 + delta_p)
             
-        for k in range(j+1, len(neighbors)):
+        for k in range(j+1, len(self.neighbors)):
             self.p_table[i][k] = (self.p_table[i][k]) / (1.0 + delta_p)
             
         """ set ant's last visted node to current """
@@ -111,7 +118,7 @@ class Node:
     		None
     	"""
         
-        ant = Ant(self.num, random.randint(0, net_size - 2))
+        ant = Ant(self.num, random.randint(0, self.net_size - 2))
         
         if ant.dest == self.num:
             ant.dest += 1
