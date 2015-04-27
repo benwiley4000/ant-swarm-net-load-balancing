@@ -18,39 +18,39 @@ violet: #FF99FF
 graph [
   node [
     id 0
-    label “0”
+    label "0"
     graphics [
       x xxx.xxx
       y yyy.yyy
-      fill “#colorr”
+      fill "#colorr"
       w 40.0
       h 40.0
-      type “Ellipse”
-      outline “#000000”
+      type "Ellipse"
+      outline "#000000"
       nodeFontSize 22
-      nodeLabelColor “#000000”
+      nodeLabelColor "#000000"
     ]
   ]
   node [
     id 1
-    label “1”
+    label "1"
     graphics [
       x xxx.xxx
       y yyy.yyy
-      fill “#colorr”
+      fill "#colorr"
       w 40.0
       h 40.0
-      type “Ellipse”
-      outline “#000000”
+      type "Ellipse"
+      outline "#000000"
       nodeFontSize 22
-      nodeLabelColor “#000000”
+      nodeLabelColor "#000000"
     ]
   ]
   edge [
     source s
     target t
     graphics [
-      fill “#colorr”
+      fill "#colorr"
     ]
   ]
 ]
