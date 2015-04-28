@@ -44,14 +44,15 @@ def main():
 		
 		i += 1
 	
-	
-	for i in range(500):
+	for i in range(2000):
 		move_ants(adj_list)
 	
 	for node in adj_list:
 		print "Node " + str(adj_list.index(node)) + " has " + str(len(node.ants)) + " ready and " + str(len(node.delayed)) + " delayed"
 		node.ants = []
 		node.delayed = []
+		node.new_ant()
+	
 	print ""
 	
 	for node in adj_list:

@@ -52,8 +52,7 @@ class Node:
     def add(self, ant):
     	"""
     	Accepts an ant and either adds it to the list of current ants
-        or to the list of delayed ants waiting to drop pheromones..
-        unless the ant has reached its final destination. Then it dies.
+        or to the list of delayed ants waiting to drop pheromones.
 	
     	Parameters:
     		ant - Ant - Ant to be added
@@ -62,18 +61,15 @@ class Node:
     		None
     	"""
         
-        """ if the ant has arrived at its destination, let it die """
-        if self.num != ant.dest:
+        delay = round(80 * math.exp(-.075 * (self.max_load - self.load)))
+        
+        if delay == 0:
             
-            delay = round(80 * math.exp(-.075 * (self.max_load - self.load)))
+            self.add_ant(ant)
             
-            if delay == 0:
-                
-                self.add_ant(ant)
+        else:
             
-            else:
-                
-                self.delayed.append([ant, delay])
+            self.delayed.append([ant, delay])
     
     def add_ant(self, ant):
     	"""
@@ -104,8 +100,9 @@ class Node:
         """ set ant's last visted node to current """
         ant.prev = self.num
         
-        """ add the ant to this node's ant list """
-        self.ants.append(ant)
+        """ add the ant to this node's ant list, unless arrived.. then kill it. """
+        if self.num != ant.dest:
+			self.ants.append(ant)
     
     def new_ant(self):
     	"""
@@ -182,9 +179,8 @@ class Node:
         while i >= 0:
             
             if self.delayed[i][1] == 0:
-                
-                self.add_ant(self.delayed.pop(i)[0])
-                
+				self.add_ant(self.delayed.pop(i)[0])
+			
             i -= 1
                 
         self.new_ant()
