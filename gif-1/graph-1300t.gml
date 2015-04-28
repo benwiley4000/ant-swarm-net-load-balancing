@@ -70,7 +70,7 @@ graph [
 		source 0
 		target 2
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -84,14 +84,14 @@ graph [
 		source 1
 		target 3
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 2
 		target 3
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 ]

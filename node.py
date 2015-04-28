@@ -61,7 +61,7 @@ class Node:
     		None
     	"""
         
-        delay = round(80 * math.exp(-.075 * (self.max_load - self.load)))
+        delay = math.floor(80 * math.exp(-.075 * (self.max_load - self.load)))
         
         if delay == 0:
             
@@ -87,6 +87,9 @@ class Node:
         i = ant.source
         j = self.neighbors.index(ant.prev)
         
+        if i == 27 and (self.num == 2 or self.num == 3 or ant.prev == 2 or ant.prev == 3):
+			print "Ant from " + str(ant.prev) + " to " + str(self.num) + " goes from " + str(self.p_table[i][j]) + " to " + str((self.p_table[i][j] + delta_p) / (1.0 + delta_p))
+        
         """ increase p for previous node """
         self.p_table[i][j] = (self.p_table[i][j] + delta_p) / (1.0 + delta_p)
         
@@ -96,7 +99,7 @@ class Node:
             
         for k in range(j+1, len(self.neighbors)):
             self.p_table[i][k] = (self.p_table[i][k]) / (1.0 + delta_p)
-            
+        
         """ set ant's last visted node to current """
         ant.prev = self.num
         

@@ -5,7 +5,7 @@ graph [
 		graphics [
 			x -202.91083942036886
 			y -622.9815181313063
-			fill "#FF9999"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -63,14 +63,14 @@ graph [
 		source 0
 		target 1
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 0
 		target 2
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -84,14 +84,14 @@ graph [
 		source 1
 		target 3
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 2
 		target 3
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 ]

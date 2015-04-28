@@ -19,12 +19,12 @@ def main():
 	assumes graph nodes are numbered 0, 1, ... n-1.
 	line l (numbered 1, 2, ... n) contains neighbors for node l - 1.
 	"""
-	with open('adjacency-list.txt') as f:
+	with open('adjacency-list-1.txt') as f:
 		lines = f.readlines()
 		for line in lines:
 			adj_list.append( Node( len( adj_list ), len( lines ), line.split() ) )
 	
-	coordinates = open("coordinates.txt").readlines()
+	coordinates = open("coordinates-1.txt").readlines()
 	i = 0
 	while i < len(coordinates):
 		coordinates[i] = str(coordinates[i]).split()
@@ -44,7 +44,8 @@ def main():
 		
 		i += 1
 	
-	for i in range(2000):
+	for i in range(50):
+		print "Tick: " + str(i)
 		move_ants(adj_list)
 	
 	for node in adj_list:
@@ -74,6 +75,7 @@ def main():
 	
 	for i in range(10000):
 		#print lost_call_list
+		
 		if i % 100 == 0:
 			graph_out(adj_list, edge_list, coordinates, call_routes, i)
 		
@@ -131,10 +133,11 @@ def move_ants(adj_list):
 			adj_list[migrant[1]].add(migrant[0])
 
 def route_call(source, dest, adj_list):
+	label = random.randint(1,1000)
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:
-		#print "S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
+		print "call " + str(label) + ": S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 		if current_node.max_load - current_node.load == 0:
 			for n in nodes:
 				adj_list[n].load -= 1
@@ -157,6 +160,9 @@ def route_call(source, dest, adj_list):
 	current_node = adj_list[current_node.neighbors[current_node.p_table[dest].index(max(current_node.p_table[dest]))]] #def recheck this later
 	
 	return nodes
+
+#def dijkstra_call(source, dest, adj_list):
+	
 
 def start_call(tick, adj_list):
 	source = int(random.randrange(len(adj_list)))
@@ -187,7 +193,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif-1/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -259,7 +265,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif-1/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
