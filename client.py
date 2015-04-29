@@ -219,10 +219,29 @@ def route_dijkstra(source, dest, adj_list, call_routes):
 	current_node.load += 1		
 	return nodes
 
+def backtrace(source, dest, parent):
+	path = [dest]
+	while path[-1] != source:
+		path.append(parent[path[-1]])
+	path.reverse()
+	return path
+
 def bfs(source, dest, adj_list):
-	queue = Queue()
-	queue.enqueue(source)
-	while (queue.size() > 0)
+	parent = {}
+	queue = []
+	queue.append(source)
+	while queue.size() > 0:
+		node = queue.pop(0)
+		if node == dest:
+			path = backtrace(source, dest, parent)
+			for n in path:
+				if adj_list[n].max_load - adj_list[n].load == 0:
+					return None
+			return path
+		for n in adj_list[node].neighbors:
+			parent[n] = node
+			queue.append(n)
+	return None
 
 def other_routing(source, dest, adj_list, call_routes):
 	current_node = adj_list[source]
