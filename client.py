@@ -87,7 +87,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = route_call(source, dest, adj_list)
+			result = route_dijkstra(source, dest, adj_list, call_routes)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -107,7 +107,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = route_call(source, dest, adj_list)
+				result = route_dijkstra(source, dest, adj_list, call_routes)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -195,7 +195,8 @@ def get_dijkstra_graph(source, adj_list, call_routes):
 				path[edge] = min_node
 	return [visited, path] #path is dijk_graph in route_djikstra
 	
-def route_dijkstra(source, dest, dijk_graph): 
+def route_dijkstra(source, dest, adj_list, call_routes):
+	dijk_graph = get_dijkstra_graph(source, adj_list, call_routes)
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:
@@ -206,8 +207,8 @@ def route_dijkstra(source, dest, dijk_graph):
 			return None
 	
 		nodes.append(current_node.num)
-		current_node.load += 1	
-		current_node = adj_list[djik_graph[current_node.num]]
+		current_node.load += 1]
+		current_node = adj_list[dijk_graph[current_node.num]]
 	if current_node.max_load - current_node.load == 0:
 		for n in nodes:
 			adj_list[n].load -= 1
@@ -290,7 +291,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif-dijkstra/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -362,7 +363,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif-dijkstra/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
