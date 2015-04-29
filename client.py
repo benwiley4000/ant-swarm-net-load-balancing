@@ -177,7 +177,7 @@ def dijkstra_call(source, dest, adj_list, call_routes):
 		edge = None
 		for n in current_node.neighbors:
 			temp = edge_load(current_node.num, n, call_routes)
-			if temp < edge_weight and edge not in nodes:
+			if temp < edge_weight and n not in nodes:
 				edge_weight = temp
 				edge = n
 		current_node = adj_list[n]
@@ -193,7 +193,7 @@ def dijkstra_call(source, dest, adj_list, call_routes):
 	edge = None
 	for n in current_node.neighbors:
 		temp = edge_load(current_node.num, n, call_routes)
-		if temp < edge_weight and edge not in nodes:
+		if temp < edge_weight and n not in nodes:
 			edge_weight = temp
 			edge = n
 			
