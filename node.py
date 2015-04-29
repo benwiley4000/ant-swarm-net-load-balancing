@@ -48,6 +48,9 @@ class Node:
             self.p_table.append([1.0/len(neighbors),] * len(neighbors))
         
         self.new_ant()
+        
+        self.dead_ants = 0
+        self.dead_age = 0
     
     def add(self, ant):
     	"""
@@ -106,6 +109,10 @@ class Node:
         """ add the ant to this node's ant list, unless arrived.. then kill it. """
         if self.num != ant.dest:
 			self.ants.append(ant)
+		
+        else:
+			self.dead_ants += 1
+			self.dead_age += ant.age
     
     def new_ant(self):
     	"""

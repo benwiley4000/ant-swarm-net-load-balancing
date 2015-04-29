@@ -48,13 +48,20 @@ def main():
 		#print "Tick: " + str(i)
 		move_ants(adj_list)
 	
+	total_ants = 0
+	total_dead = 0
+	total_age = 0
 	for node in adj_list:
-		#print "Node " + str(adj_list.index(node)) + " has " + str(len(node.ants)) + " ready and " + str(len(node.delayed)) + " delayed"
+		print "Node " + str(adj_list.index(node)) + " has " + str(len(node.ants)) + " ready and " + str(len(node.delayed)) + " delayed"
+		total_ants += len(node.ants) + len(node.delayed)
+		total_dead += node.dead_ants
+		total_age += node.dead_age
 		node.ants = []
 		node.delayed = []
 		node.new_ant()
 	
-	print ""
+	print "Total current ants: " + str(total_ants)
+	print "Average lifespan: " + str(total_age / total_dead)
 	
 	for node in adj_list:
 		print "NODE " + str(adj_list.index(node))
@@ -73,7 +80,7 @@ def main():
 	call_prob = 0.9
 	call_prob_2 = 0.5
 	
-	for i in range(10000):
+	for i in range(10001):
 		#print lost_call_list
 		
 		if i % 100 == 0:
@@ -87,7 +94,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = route_dijkstra(source, dest, adj_list, call_routes)
+			result = bfs(source, dest, adj_list)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -107,7 +114,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = route_dijkstra(source, dest, adj_list, call_routes)
+				result = bfs(source, dest, adj_list)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -120,12 +127,16 @@ def main():
 		
 		while i in call_ends:
 			index = call_ends.index(i)
-			call_ends.pop(i)
-			call_list.pop(i)
-			end_call(call_routes.pop(i))
+			call_ends.pop(index)
+			call_list.pop(index)
+			end_call(call_routes.pop(index), adj_list)
 		
 		move_ants(adj_list)
-
+	
+	print "Number of successful calls: " + str(len(successful_call_list))
+	print "Number of lost calls: " + str(len(lost_call_list))
+	print "Total number of calls: " + str(len(successful_call_list) + len(lost_call_list))
+	
 def move_ants(adj_list):
 	for node in adj_list:
 		migrants = node.get_migrants()
@@ -207,7 +218,7 @@ def route_dijkstra(source, dest, adj_list, call_routes):
 			return None
 	
 		nodes.append(current_node.num)
-		current_node.load += 1]
+		current_node.load += 1
 		current_node = adj_list[dijk_graph[current_node.num]]
 	if current_node.max_load - current_node.load == 0:
 		for n in nodes:
@@ -229,18 +240,24 @@ def backtrace(source, dest, parent):
 def bfs(source, dest, adj_list):
 	parent = {}
 	queue = []
+	visited = []
 	queue.append(source)
-	while queue.size() > 0:
+	visited.append(source)
+	while len(queue) > 0:
 		node = queue.pop(0)
 		if node == dest:
 			path = backtrace(source, dest, parent)
 			for n in path:
 				if adj_list[n].max_load - adj_list[n].load == 0:
 					return None
+			for n in path:
+				adj_list[n].load += 1
 			return path
 		for n in adj_list[node].neighbors:
-			parent[n] = node
-			queue.append(n)
+			if n not in visited:
+				parent[n] = node
+				queue.append(n)
+				visited.append(n)
 	return None
 
 def other_routing(source, dest, adj_list, call_routes):
@@ -288,10 +305,10 @@ def start_call(tick, adj_list):
 		dest = int(random.randrange(len(adj_list)))
 		length = -1
 	while length < 0:
-		length = random.gauss(170, 20)
+		length = int(random.gauss(170, 20))
 	return [source, dest, length + tick]
 
-def end_call(route):
+def end_call(route, adj_list):
 	for i in route:
 		adj_list[i].load -= 1
 
@@ -310,7 +327,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif-dijkstra/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif-bfs/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -382,7 +399,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif-dijkstra/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif-bfs/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
