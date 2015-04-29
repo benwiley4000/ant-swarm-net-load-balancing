@@ -144,7 +144,7 @@ def move_ants(adj_list):
 			adj_list[migrant[1]].add(migrant[0])
 
 def route_call(source, dest, adj_list):
-	label = random.randint(1,1000)
+	#label = random.randint(1,1000)
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:

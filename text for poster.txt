@@ -1,0 +1,30 @@
+Abstract
+—————
+
+Background
+
+-telecommunications problems
+-ants in nature
+-prior research
+
+
+Algorithm Description
+
+Schoonderwoerd et al. characterize an ant-based control (ABC) system as follows:• Ants are regularly launched with random destinations on every part of the system.• Ants walk randomly according to probabilities in pheromone tables for their particular destination.• Ants update the probabilities in the pheromone table for the location they were launched from, by increasing the probability of selection of their previous location by subsequent ants.• The increase in these probabilities is a decreasing function of the age of the ant, and of the original probability.• This probability increase could also be a function of penalties or rewards the ant has gathered on its way.• The ants get delayed on parts of the system that are heavily used.• The ants could eventually be penalised or rewarded as a function of local system utilisation.• To avoid overtraining through freezing of pheromone trails, some noise can be added to thebehaviour of the ants.
+
+Methodology
+-use BT network as example
+-coded in python
+-specify parameters
+-outputs GML graph code, visualized in Cytoscape
+
+Results
+-graphs for ant and BFS for: 0, 2000, 4000, 6000, 8000, 10000
+-number of dropped and successful calls for each
+
+Conclusion
+-we were successful in implementing the algorithm
+-possible extensions
+——different network topologies
+——non-uniform node capacities
+——different call table options (ours assumed any node could call any other node with equal likelihood, but perhaps we use a call frequency table to introduce bias)
