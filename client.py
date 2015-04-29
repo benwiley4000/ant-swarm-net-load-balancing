@@ -208,6 +208,20 @@ def route_dijkstra(source, dest, dijk_graph):
 		nodes.append(current_node.num)
 		current_node.load += 1	
 		current_node = adj_list[djik_graph[current_node.num]]
+	if current_node.max_load - current_node.load == 0:
+		for n in nodes:
+			adj_list[n].load -= 1
+			
+		return None
+	
+	nodes.append(current_node.num)
+	current_node.load += 1		
+	return nodes
+
+def bfs(source, dest, adj_list):
+	queue = Queue()
+	queue.enqueue(source)
+	while (queue.size() > 0)
 
 def other_routing(source, dest, adj_list, call_routes):
 	current_node = adj_list[source]
