@@ -161,8 +161,43 @@ def route_call(source, dest, adj_list):
 	
 	return nodes
 
-#def dijkstra_call(source, dest, adj_list):
+def dijkstra_call(source, dest, adj_list, call_routes):
+	current_node = adj_list[source]
+	nodes = []
+	while current_node.num != dest:
+		if current_node.max_load - current_node.load == 0:
+			for n in nodes:
+				adj_list[n].load -= 1
+				
+			return None
+		
+		nodes.append(current_node.num)
+		current_node.load += 1
+		edge_weight = 1000
+		edge = None
+		for n in current_node.neighbors:
+			temp = edge_load(current_node.num, n, call_routes)
+			if temp < edge_weight and edge not in nodes:
+				edge_weight = temp
+				edge = n
+		current_node = adj_list[n]
+	if current_node.max_load - current_node.load == 0:
+		for n in nodes:
+			adj_list[n].load -= 1
+			
+		return None
 	
+	nodes.append(current_node.num)
+	current_node.load += 1
+	edge_weight = 1000
+	edge = None
+	for n in current_node.neighbors:
+		temp = edge_load(current_node.num, n, call_routes)
+		if temp < edge_weight and edge not in nodes:
+			edge_weight = temp
+			edge = n
+			
+	return nodes
 
 def start_call(tick, adj_list):
 	source = int(random.randrange(len(adj_list)))
