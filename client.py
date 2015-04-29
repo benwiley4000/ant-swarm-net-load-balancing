@@ -87,7 +87,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = route_call(source, dest, adj_list)
+			result = dijkstra_call(source, dest, adj_list, call_routes)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -107,7 +107,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = route_call(source, dest, adj_list)
+				result = dijkstra_call(source, dest, adj_list, call_routes)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -228,7 +228,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif-dijkstra/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -300,7 +300,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif-dijkstra/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
