@@ -87,7 +87,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = dijkstra_call(source, dest, adj_list, call_routes)
+			result = route_dijkstra(source, dest, adj_list, call_routes)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -107,7 +107,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = dijkstra_call(source, dest, adj_list, call_routes)
+				result = route_dijkstra(source, dest, adj_list, call_routes)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -195,7 +195,8 @@ def get_dijkstra_graph(source, adj_list, call_routes):
 				path[edge] = min_node
 	return [visited, path] #path is dijk_graph in route_djikstra
 	
-def route_dijkstra(source, dest, dijk_graph): 
+def route_dijkstra(source, dest, adj_list, call_routes):
+	dijk_graph = get_dijkstra_graph(source, adj_list, call_routes)
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:
@@ -207,7 +208,17 @@ def route_dijkstra(source, dest, dijk_graph):
 	
 		nodes.append(current_node.num)
 		current_node.load += 1	
-		current_node = adj_list[djik_graph[current_node.num]]
+		current_node = adj_list[dijk_graph[current_node.num]]
+	if current_node.max_load - current_node.load == 0:
+		for n in nodes:
+			adj_list[n].load -= 1
+			
+		return None
+	
+	nodes.append(current_node.num)
+	current_node.load += 1
+	
+	return nodes
 
 def other_routing(source, dest, adj_list, call_routes):
 	current_node = adj_list[source]
