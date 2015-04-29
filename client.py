@@ -19,12 +19,12 @@ def main():
 	assumes graph nodes are numbered 0, 1, ... n-1.
 	line l (numbered 1, 2, ... n) contains neighbors for node l - 1.
 	"""
-	with open('adjacency-list-1.txt') as f:
+	with open('adjacency-list.txt') as f:
 		lines = f.readlines()
 		for line in lines:
 			adj_list.append( Node( len( adj_list ), len( lines ), line.split() ) )
 	
-	coordinates = open("coordinates-1.txt").readlines()
+	coordinates = open("coordinates.txt").readlines()
 	i = 0
 	while i < len(coordinates):
 		coordinates[i] = str(coordinates[i]).split()
@@ -44,12 +44,12 @@ def main():
 		
 		i += 1
 	
-	for i in range(50):
-		print "Tick: " + str(i)
+	for i in range(500):
+		#print "Tick: " + str(i)
 		move_ants(adj_list)
 	
 	for node in adj_list:
-		print "Node " + str(adj_list.index(node)) + " has " + str(len(node.ants)) + " ready and " + str(len(node.delayed)) + " delayed"
+		#print "Node " + str(adj_list.index(node)) + " has " + str(len(node.ants)) + " ready and " + str(len(node.delayed)) + " delayed"
 		node.ants = []
 		node.delayed = []
 		node.new_ant()
@@ -92,7 +92,7 @@ def main():
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
 				call_ends.append(call[2])
-				print "I am appending " + str(result) + " (" + str(source) + ", " + str(dest) + ")"
+				#print "I am appending " + str(result) + " (" + str(source) + ", " + str(dest) + ")"
 				call_routes.append(result)
 			
 			else:
@@ -112,7 +112,7 @@ def main():
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
 					call_ends.append(call[2])
-					print "I am appending " + str(result) + " (" + str(source) + ", " + str(dest) + ")"
+					#print "I am appending " + str(result) + " (" + str(source) + ", " + str(dest) + ")"
 					call_routes.append(result)
 				
 				else:
@@ -137,7 +137,7 @@ def route_call(source, dest, adj_list):
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:
-		print "call " + str(label) + ": S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
+		#print "call " + str(label) + ": S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 		if current_node.max_load - current_node.load == 0:
 			for n in nodes:
 				adj_list[n].load -= 1
@@ -193,7 +193,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif-1/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -265,7 +265,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif-1/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()

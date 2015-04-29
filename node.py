@@ -87,8 +87,8 @@ class Node:
         i = ant.source
         j = self.neighbors.index(ant.prev)
         
-        if i == 27 and (self.num == 2 or self.num == 3 or ant.prev == 2 or ant.prev == 3):
-			print "Ant from " + str(ant.prev) + " to " + str(self.num) + " goes from " + str(self.p_table[i][j]) + " to " + str((self.p_table[i][j] + delta_p) / (1.0 + delta_p))
+        #if i == 27 and (self.num == 2 or self.num == 3 or ant.prev == 2 or ant.prev == 3):
+			#print "Ant from " + str(ant.prev) + " to " + str(self.num) + " goes from " + str(self.p_table[i][j]) + " to " + str((self.p_table[i][j] + delta_p) / (1.0 + delta_p))
         
         """ increase p for previous node """
         self.p_table[i][j] = (self.p_table[i][j] + delta_p) / (1.0 + delta_p)
@@ -161,7 +161,7 @@ class Node:
                 rand = random.random()
                 done = False
                 
-                for i in range(0, len(self.neighbors) - 2):
+                for i in range(0, len(self.neighbors) - 1):
                     
                     cumulative += self.p_table[ant.dest][i]
                     
