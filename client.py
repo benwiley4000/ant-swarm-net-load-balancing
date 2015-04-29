@@ -161,7 +161,55 @@ def route_call(source, dest, adj_list):
 	
 	return nodes
 
-def dijkstra_call(source, dest, adj_list, call_routes):
+def get_dijkstra_graph(source, adj_list, call_routes):
+	nodes = []
+	visited = {source: 0}
+	distances = {}
+	path = {}
+	for n in range(len(adj_list)):
+		nodes.append(n)
+	for n in range(len(adj_list)):
+		weights = {}
+		for i in adj_list[n].neighbors:
+			weights[i] = edge_load(n, i, call_routes)
+		distances[n] = weights
+	
+	while len(nodes) > 0:
+		min_node = None
+		for node in nodes:
+			if node in visited:
+				if min_node is None:
+					min_node = node
+				elif visited[node] < visited[min_node]:
+					min_node = node
+		
+		if min_node is None:
+			break
+		
+		nodes.remove(min_node)
+		current_weight = visited[min_node]
+		for edge, weight in distances[min_node].iteritems():
+			weight = current_weight + weight
+			if edge not in visited or weight < visited[edge]:
+				visited[edge] = weight
+				path[edge] = min_node
+	return [visited, path] #path is dijk_graph in route_djikstra
+	
+def route_dijkstra(source, dest, dijk_graph): 
+	current_node = adj_list[source]
+	nodes = []
+	while current_node.num != dest:
+		if current_node.max_load - current_node.load == 0:
+			for n in nodes:
+				adj_list[n].load -= 1
+				
+			return None
+	
+		nodes.append(current_node.num)
+		current_node.load += 1	
+		current_node = adj_list[djik_graph[current_node.num]]
+
+def other_routing(source, dest, adj_list, call_routes):
 	current_node = adj_list[source]
 	nodes = []
 	while current_node.num != dest:
