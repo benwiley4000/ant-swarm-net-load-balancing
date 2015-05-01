@@ -5,6 +5,7 @@
 from ant import Ant
 from node import Node
 import random
+import sys
 
 __author__ = "Ben Wiley and Tommy Rhodes"
 __email__ = "bewiley@davidson.edu, torhodes@davidson.edu"
@@ -94,7 +95,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = bfs(source, dest, adj_list)
+			result = route_call(source, dest, adj_list)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -114,7 +115,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = bfs(source, dest, adj_list)
+				result = route_call(source, dest, adj_list)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -206,7 +207,7 @@ def get_dijkstra_graph(source, adj_list, call_routes):
 				path[edge] = min_node
 	return [visited, path] #path is dijk_graph in route_djikstra
 	
-def route_dijkstra(source, dest, adj_list, call_routes):
+def not_dijkstra(source, dest, adj_list, call_routes):
 	dijk_graph = get_dijkstra_graph(source, adj_list, call_routes)
 	current_node = adj_list[source]
 	nodes = []
@@ -229,6 +230,47 @@ def route_dijkstra(source, dest, adj_list, call_routes):
 	nodes.append(current_node.num)
 	current_node.load += 1		
 	return nodes
+
+def min_in_q(dist, q):
+    d = dist[:]
+    u = d.index(min(d))
+    while u not in q:
+        d[u] = sys.maxint
+        u = d.index(min(d))
+    
+    return u
+
+def route_dijkstra(source, dest, adj_list):
+    # MODIFIED VERSION OF DIJKSTRA: uses v.load rather than load(u, v)
+    # Node loads are more useful metric here than edge weight
+    dist = [sys.maxint] * len(adj_list) # all (except S) start w/ infinite dist
+    dist[source] = 0 # distance for source node is 0
+    prev = [None] * len(adj_list) # all previous nodes are initially undefined
+    q = range(0, len(adj_list)) # add all nodes initially
+    
+    while q:
+        u = min_in_q(dist, q)
+        if u == dest: break
+        
+        q.remove(u)
+        
+        for v in adj_list[u].neighbors:
+            if v in q:
+                alt = dist[u] + adj_list[v].load
+                if alt < dist[v]:
+                    dist[v] = alt
+                    prev[v] = u
+    
+    path = []
+    u = dest
+    while prev[u]:
+        path = [u] + path
+        u = prev[u]
+    
+    for n in path:
+        adj_list[n].load += 1
+    
+    return path
 
 def backtrace(source, dest, parent):
 	path = [dest]
@@ -327,7 +369,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif-bfs/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -399,7 +441,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif-bfs/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
