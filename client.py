@@ -81,10 +81,12 @@ def main():
 	call_prob = 0.9
 	call_prob_2 = 0.5
 	
+	f_lost = open("dijkstra-lost.txt", 'w')
+	
 	for i in range(10001):
 		#print lost_call_list
 		
-		if i % 100 == 0:
+		if i % 1 == 0: #was i % 100
 			graph_out(adj_list, edge_list, coordinates, call_routes, i)
 		
 		if random.random() < call_prob:
@@ -95,7 +97,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = route_call(source, dest, adj_list)
+			result = route_dijkstra(source, dest, adj_list)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -105,9 +107,11 @@ def main():
 			
 			else:
 				lost_call_list.append(call[0:2])
+				print "Call lost at " + str(i) + " ticks."
+				f_lost.write(str(i) + "\n")
 		
 		elif random.random() < call_prob_2:
-		    for k in range(2): 
+			for k in range(2): 
 				call = start_call(i, adj_list)
 				
 				source = random.randint(0, len(adj_list) - 1)
@@ -115,7 +119,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = route_call(source, dest, adj_list)
+				result = route_dijkstra(source, dest, adj_list)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -125,6 +129,8 @@ def main():
 				
 				else:
 					lost_call_list.append(call[0:2])
+                	print "Call lost at " + str(i) + " ticks."
+                	f_lost.write(str(i) + "\n")
 		
 		while i in call_ends:
 			index = call_ends.index(i)
@@ -134,6 +140,8 @@ def main():
 		
 		move_ants(adj_list)
 	
+	f_lost.close()
+    
 	print "Number of successful calls: " + str(len(successful_call_list))
 	print "Number of lost calls: " + str(len(lost_call_list))
 	print "Total number of calls: " + str(len(successful_call_list) + len(lost_call_list))
@@ -369,7 +377,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif-dijkstra/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -441,7 +449,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif-dijkstra/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
