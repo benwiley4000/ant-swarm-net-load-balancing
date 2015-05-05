@@ -83,7 +83,7 @@ def main():
 	
 	f_lost = open("ant-lost.txt", 'w')
 	
-	for i in range(10001):
+	for i in range(1001):
 		#print lost_call_list
 		
 		if i % 1 == 0: #was i % 100
@@ -97,7 +97,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = route_call(source, dest, adj_list)
+			result = route_dijkstra(source, dest, adj_list)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -106,8 +106,9 @@ def main():
 				call_routes.append(result)
 			
 			else:
+				print result
 				lost_call_list.append(call[0:2])
-				print "Call lost at " + str(i) + " ticks."
+				#print "Call lost at " + str(i) + " ticks."
 				f_lost.write(str(i) + "\n")
 		
 		elif random.random() < call_prob_2:
@@ -119,7 +120,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = route_call(source, dest, adj_list)
+				result = route_dijkstra(source, dest, adj_list)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -129,8 +130,10 @@ def main():
 				
 				else:
 					lost_call_list.append(call[0:2])
-                	print "Call lost at " + str(i) + " ticks."
-                	f_lost.write(str(i) + "\n")
+					f_lost.write(str(i) + "\n")
+					print result
+					#print "Call lost at " + str(i) + " ticks."
+			
 		
 		while i in call_ends:
 			index = call_ends.index(i)
@@ -159,6 +162,7 @@ def route_call(source, dest, adj_list):
 	while current_node.num != dest:
 		#print "call " + str(label) + ": S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 		if current_node.max_load - current_node.load == 0:
+			print "Call failed at node: " + str(current_node.num) + " with load " + str(current_node.load)
 			for n in nodes:
 				adj_list[n].load -= 1
 			
@@ -170,6 +174,7 @@ def route_call(source, dest, adj_list):
 	
 	#print "S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 	if current_node.max_load - current_node.load == 0:
+		print "Call failed at node: " + str(current_node.num) + " with load " + str(current_node.load)
 		for n in nodes:
 			adj_list[n].load -= 1
 		
@@ -258,7 +263,8 @@ def route_dijkstra(source, dest, adj_list):
     
     while q:
         u = min_in_q(dist, q)
-        if u == dest: break
+        if u == dest:
+            break
         
         q.remove(u)
         
@@ -271,9 +277,14 @@ def route_dijkstra(source, dest, adj_list):
     
     path = []
     u = dest
-    while prev[u]:
+    while prev[u] or prev[u] == 0:
         path = [u] + path
         u = prev[u]
+    
+    for n in path:
+        if adj_list[n].max_load <= adj_list[n].load:
+            print "Call lost at node: " + str(n) + " with load " + str(adj_list[n].load)
+            return None
     
     for n in path:
         adj_list[n].load += 1
