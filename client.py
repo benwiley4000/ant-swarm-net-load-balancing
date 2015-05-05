@@ -83,7 +83,7 @@ def main():
 	
 	f_lost = open("ant-lost.txt", 'w')
 	
-	for i in range(10001):
+	for i in range(1501): #10001
 		#print lost_call_list
 		
 		if i % 1 == 0: #was i % 100

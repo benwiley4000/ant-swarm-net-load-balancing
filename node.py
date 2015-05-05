@@ -13,7 +13,7 @@ class Node:
     """
     
     MAX_LOAD = 40
-    NOISE = .05
+    NOISE = .95
     
     def __init__(self, num, net_size, neighbors):
         """
@@ -68,7 +68,7 @@ class Node:
         
         if delay == 0:
             
-            print "wow got here!!"
+            print "wow got here!! impossible"
             self.add_ant(ant)
             
         else:
