@@ -160,8 +160,8 @@ def route_call(source, dest, adj_list):
 	while current_node.num != dest:
 		#print "call " + str(label) + ": S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 		if current_node.max_load - current_node.load == 0:
-			print "Source: " + str(source) + ", Dest: " + str(dest)
-			print nodes
+			#print "Source: " + str(source) + ", Dest: " + str(dest)
+			#print nodes
 			for n in nodes:
 				adj_list[n].load -= 1
 			
@@ -173,8 +173,8 @@ def route_call(source, dest, adj_list):
 	
 	#print "S: " + str(source) + " D: " + str(dest) + " C: " + str(current_node.num)
 	if current_node.max_load - current_node.load == 0:
-		print "Source: " + str(source) + ", Dest: " + str(dest)
-		print nodes
+		#print "Source: " + str(source) + ", Dest: " + str(dest)
+		#print nodes
 		for n in nodes:
 			adj_list[n].load -= 1
 		
@@ -186,6 +186,7 @@ def route_call(source, dest, adj_list):
 	
 	return nodes
 
+"""
 def get_dijkstra_graph(source, adj_list, call_routes):
 	nodes = []
 	visited = {source: 0}
@@ -252,6 +253,7 @@ def min_in_q(dist, q):
         u = d.index(min(d))
     
     return u
+"""
 
 def route_dijkstra(source, dest, adj_list):
     # MODIFIED VERSION OF DIJKSTRA: uses v.load rather than load(u, v)
@@ -321,6 +323,7 @@ def bfs(source, dest, adj_list):
 				visited.append(n)
 	return None
 
+"""
 def other_routing(source, dest, adj_list, call_routes):
 	current_node = adj_list[source]
 	nodes = []
@@ -358,6 +361,7 @@ def other_routing(source, dest, adj_list, call_routes):
 			edge = n
 			
 	return nodes
+"""
 
 def start_call(tick, adj_list):
 	source = int(random.randrange(len(adj_list)))

@@ -64,10 +64,11 @@ class Node:
     		None
     	"""
         
-        delay = math.floor(80 * math.exp(-.075 * (self.max_load - self.load)))
+        delay = int(math.floor(80 * math.exp(-.075 * (self.max_load - self.load))))
         
         if delay == 0:
             
+            print "wow got here!!"
             self.add_ant(ant)
             
         else:
@@ -127,7 +128,7 @@ class Node:
         
         ant = Ant(self.num, random.randint(0, self.net_size - 2))
         
-        if ant.dest == self.num:
+        if ant.dest >= self.num:
             ant.dest += 1
         
         ant.prev = self.num
