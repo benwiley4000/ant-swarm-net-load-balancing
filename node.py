@@ -13,7 +13,7 @@ class Node:
     """
     
     MAX_LOAD = 40
-    NOISE = .95
+    NOISE = .05
     
     def __init__(self, num, net_size, neighbors):
         """
@@ -51,6 +51,8 @@ class Node:
         
         self.dead_ants = 0
         self.dead_age = 0
+        
+        #self.init_phase = True
     
     def add(self, ant):
     	"""
@@ -159,12 +161,13 @@ class Node:
             
             n = 0
             
-            if random.random() < Node.NOISE:
+            if random.random() < Node.NOISE:# or self.init_phase:
                 
                 n = self.neighbors[random.randint(0, len(self.neighbors) - 1)]
             
             else:
                 
+                """
                 cumulative = 0.0
                 rand = random.random()
                 done = False
@@ -181,6 +184,16 @@ class Node:
                 if not done:
                     
                     n = self.neighbors[-1]
+                """
+                
+                rand = random.random()
+                
+                for i in range(0, len(self.neighbors)):
+                	rand -= self.p_table[ant.dest][i]
+                	if rand <= 0:
+                		n = self.neighbors[i]
+                		break
+            
             
             migrants.append((ant, n))
         

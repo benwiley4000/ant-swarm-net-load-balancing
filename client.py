@@ -49,6 +49,14 @@ def main():
 		#print "Tick: " + str(i)
 		move_ants(adj_list)
 	
+	"""
+	for node in adj_list:
+		node.init_phase = False
+	
+	for i in range(500):
+		move_ants(adj_list)
+	"""
+	
 	total_ants = 0
 	total_dead = 0
 	total_age = 0
@@ -82,12 +90,27 @@ def main():
 	call_prob_2 = 0.5
 	
 	f_lost = open("ant-lost.txt", 'w')
+	f_pop = open("ant-pop.csv", 'w')
 	
-	for i in range(1501): #10001
+	for i in range(30001): #10001
 		#print lost_call_list
+		"""
+		if i % 100 == 0:
+			print "Ants on network:"
+			n_ants = 0
+			for node in adj_list:
+				n_ants += len(node.ants) + len(node.delayed)
+			
+			print str(n_ants)
+		"""
 		
 		if i % 1 == 0: #was i % 100
 			graph_out(adj_list, edge_list, coordinates, call_routes, i)
+			n_ants = 0
+			for node in adj_list:
+				n_ants += len(node.ants) + len(node.delayed)
+			
+			f_pop.write(str(n_ants) + '\n')
 		
 		if random.random() < call_prob:
 			call = start_call(i, adj_list)
@@ -142,6 +165,7 @@ def main():
 		move_ants(adj_list)
 	
 	f_lost.close()
+	f_pop.close()
     
 	print "Number of successful calls: " + str(len(successful_call_list))
 	print "Number of lost calls: " + str(len(lost_call_list))
