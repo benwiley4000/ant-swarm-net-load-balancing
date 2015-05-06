@@ -65,7 +65,7 @@ graph [
 		graphics [
 			x -148.98542438130636
 			y 43.61106075663312
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -80,7 +80,7 @@ graph [
 		graphics [
 			x -67.16913257222431
 			y 18.604327815959294
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -290,7 +290,7 @@ graph [
 		graphics [
 			x -119.02580676656025
 			y 651.933337825725
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -305,7 +305,7 @@ graph [
 		graphics [
 			x 34.554187435099905
 			y 542.2821537436937
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -395,7 +395,7 @@ graph [
 		graphics [
 			x 137.80609130859375
 			y 596.4462173301928
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -440,7 +440,7 @@ graph [
 		graphics [
 			x 273.72697796244364
 			y 675.4971195640062
-			fill "#CCFF99"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -516,7 +516,7 @@ graph [
 		source 4
 		target 5
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -558,7 +558,7 @@ graph [
 		source 7
 		target 10
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -649,14 +649,14 @@ graph [
 		source 11
 		target 15
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 12
 		target 17
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -677,14 +677,14 @@ graph [
 		source 13
 		target 20
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 14
 		target 16
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -698,14 +698,14 @@ graph [
 		source 15
 		target 16
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 15
 		target 17
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -733,7 +733,7 @@ graph [
 		source 18
 		target 23
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -803,7 +803,7 @@ graph [
 		source 25
 		target 27
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -824,7 +824,7 @@ graph [
 		source 27
 		target 28
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [

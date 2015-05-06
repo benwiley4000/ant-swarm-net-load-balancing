@@ -35,7 +35,7 @@ graph [
 		graphics [
 			x 69.30032696146709
 			y -323.0966304359938
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -125,7 +125,7 @@ graph [
 		graphics [
 			x -131.9924434242751
 			y 218.82072796244367
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -140,7 +140,7 @@ graph [
 		graphics [
 			x -60.99225268941181
 			y 263.8206364097093
-			fill "#FF9999"
+			fill "#FF99FF"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -155,7 +155,7 @@ graph [
 		graphics [
 			x 82.00768627543194
 			y 167.82048382181867
-			fill "#FF9999"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -170,7 +170,7 @@ graph [
 		graphics [
 			x 66.00777019877178
 			y 244.8206364097093
-			fill "#FF9999"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -185,7 +185,7 @@ graph [
 		graphics [
 			x 225.00761761088114
 			y 253.8206364097093
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -275,7 +275,7 @@ graph [
 		graphics [
 			x 423.83269085306864
 			y 418.60716595072495
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -305,7 +305,7 @@ graph [
 		graphics [
 			x 34.554187435099905
 			y 542.2821537436937
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -335,7 +335,7 @@ graph [
 		graphics [
 			x 211.47231599500256
 			y 505.22198486328125
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -365,7 +365,7 @@ graph [
 		graphics [
 			x 114.81462097167969
 			y 544.8037719726562
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -425,7 +425,7 @@ graph [
 		graphics [
 			x 76.01513256449444
 			y 647.1385990561937
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -502,7 +502,7 @@ graph [
 		source 2
 		target 6
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -516,7 +516,7 @@ graph [
 		source 4
 		target 5
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -558,14 +558,14 @@ graph [
 		source 7
 		target 10
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
 		source 7
 		target 12
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -579,14 +579,14 @@ graph [
 		source 8
 		target 10
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
 		source 8
 		target 13
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 	edge [
@@ -621,21 +621,21 @@ graph [
 		source 9
 		target 24
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 	edge [
 		source 10
 		target 11
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
 		source 10
 		target 12
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -656,7 +656,7 @@ graph [
 		source 12
 		target 17
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 	edge [
@@ -684,21 +684,21 @@ graph [
 		source 14
 		target 16
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 14
 		target 20
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 15
 		target 16
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -719,7 +719,7 @@ graph [
 		source 17
 		target 18
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -761,14 +761,14 @@ graph [
 		source 20
 		target 28
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 	edge [
 		source 21
 		target 22
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -782,7 +782,7 @@ graph [
 		source 22
 		target 23
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -803,7 +803,7 @@ graph [
 		source 25
 		target 27
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -831,7 +831,7 @@ graph [
 		source 28
 		target 29
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 ]

@@ -35,7 +35,7 @@ graph [
 		graphics [
 			x 69.30032696146709
 			y -323.0966304359938
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -50,7 +50,7 @@ graph [
 		graphics [
 			x 135.93281902689677
 			y -324.8245357094313
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -80,7 +80,7 @@ graph [
 		graphics [
 			x -67.16913257222431
 			y 18.604327815959294
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -95,7 +95,7 @@ graph [
 		graphics [
 			x 15.810283321330374
 			y -36.40258441548602
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -155,7 +155,7 @@ graph [
 		graphics [
 			x 82.00768627543194
 			y 167.82048382181867
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -215,7 +215,7 @@ graph [
 		graphics [
 			x -40.55139575581806
 			y 415.0072208823656
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -290,7 +290,7 @@ graph [
 		graphics [
 			x -119.02580676656025
 			y 651.933337825725
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -305,7 +305,7 @@ graph [
 		graphics [
 			x 34.554187435099905
 			y 542.2821537436937
-			fill "#FF9999"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -335,7 +335,7 @@ graph [
 		graphics [
 			x 211.47231599500256
 			y 505.22198486328125
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -365,7 +365,7 @@ graph [
 		graphics [
 			x 114.81462097167969
 			y 544.8037719726562
-			fill "#FF9999"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -380,7 +380,7 @@ graph [
 		graphics [
 			x 243.5579833984375
 			y 595.7760727088698
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -530,7 +530,7 @@ graph [
 		source 5
 		target 6
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -558,14 +558,14 @@ graph [
 		source 7
 		target 10
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
 		source 7
 		target 12
 		graphics [
-			fill "#FFFF66"
+			fill "#FFCC66"
 		]
 	]
 	edge [
@@ -628,7 +628,7 @@ graph [
 		source 10
 		target 11
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -677,21 +677,21 @@ graph [
 		source 13
 		target 20
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 14
 		target 16
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
 		source 14
 		target 20
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -719,7 +719,7 @@ graph [
 		source 17
 		target 18
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -768,7 +768,7 @@ graph [
 		source 21
 		target 22
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -789,7 +789,7 @@ graph [
 		source 23
 		target 25
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [

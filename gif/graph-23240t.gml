@@ -50,7 +50,7 @@ graph [
 		graphics [
 			x 135.93281902689677
 			y -324.8245357094313
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -65,7 +65,7 @@ graph [
 		graphics [
 			x -148.98542438130636
 			y 43.61106075663312
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -80,7 +80,7 @@ graph [
 		graphics [
 			x -67.16913257222431
 			y 18.604327815959294
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -95,7 +95,7 @@ graph [
 		graphics [
 			x 15.810283321330374
 			y -36.40258441548602
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -260,7 +260,7 @@ graph [
 		graphics [
 			x 277.03166546244364
 			y 375.81285442728745
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -275,7 +275,7 @@ graph [
 		graphics [
 			x 423.83269085306864
 			y 418.60716595072495
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -290,7 +290,7 @@ graph [
 		graphics [
 			x -119.02580676656025
 			y 651.933337825725
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -305,7 +305,7 @@ graph [
 		graphics [
 			x 34.554187435099905
 			y 542.2821537436937
-			fill "#FFFF66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -320,7 +320,7 @@ graph [
 		graphics [
 			x 160.01593017578125
 			y 508.0630386192553
-			fill "#FFCC66"
+			fill "#FFFF66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -365,7 +365,7 @@ graph [
 		graphics [
 			x 114.81462097167969
 			y 544.8037719726562
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -395,7 +395,7 @@ graph [
 		graphics [
 			x 137.80609130859375
 			y 596.4462173301928
-			fill "#FFCC66"
+			fill "#FF9999"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -410,7 +410,7 @@ graph [
 		graphics [
 			x 194.20150756835938
 			y 621.9290268104323
-			fill "#FFFF66"
+			fill "#FFCC66"
 			w 40.0000
 			h 40.0000
 			type "Ellipse"
@@ -551,7 +551,7 @@ graph [
 		source 6
 		target 10
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -628,7 +628,7 @@ graph [
 		source 10
 		target 11
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -656,7 +656,7 @@ graph [
 		source 12
 		target 17
 		graphics [
-			fill "#FFCC66"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -691,7 +691,7 @@ graph [
 		source 14
 		target 20
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
@@ -705,14 +705,14 @@ graph [
 		source 15
 		target 17
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 16
 		target 21
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -726,7 +726,7 @@ graph [
 		source 17
 		target 22
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [
@@ -761,28 +761,28 @@ graph [
 		source 20
 		target 28
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 21
 		target 22
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 21
 		target 24
 		graphics [
-			fill "#CCFF99"
+			fill "#FFFF66"
 		]
 	]
 	edge [
 		source 22
 		target 23
 		graphics [
-			fill "#FFFF66"
+			fill "#CCFF99"
 		]
 	]
 	edge [

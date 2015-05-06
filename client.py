@@ -427,6 +427,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 		f.write("\t\t\tx " + str(coordinates[i][0]) + "\n")
 		f.write("\t\t\ty " + str(coordinates[i][1]) + "\n")
 		
+		"""
 		if adj_list[i].load < 10:
 			#green
 			f.write("\t\t\tfill \"#CCFF99\"\n")
@@ -442,6 +443,35 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 		else:
 			#violet
 			f.write("\t\t\tfill \"#FF99FF\"\n")
+		"""
+		
+		if adj_list[i].load < 5:
+			#green
+			f.write("\t\t\tfill \"#abff5c\"\n")
+		elif adj_list[i].load < 10:
+			#green2
+			f.write("\t\t\tfill \"#d3ff5c\"\n")
+		elif adj_list[i].load < 15:
+			#yellow
+			f.write("\t\t\tfill \"#ffff5c\"\n")
+		elif adj_list[i].load < 20:
+			#yellow2
+			f.write("\t\t\tfill \"#ffdc5c\"\n")
+		elif adj_list[i].load < 25:
+			#orange
+			f.write("\t\t\tfill \"#ffb65c\"\n")
+		elif adj_list[i].load < 30:
+			#orange2
+			f.write("\t\t\tfill \"#ff855c\"\n")
+		elif adj_list[i].load < 35:
+			#red
+			f.write("\t\t\tfill \"#ff5c5c\"\n")
+		elif adj_list[i].load < 40:
+			#pink
+			f.write("\t\t\tfill \"#ff5ca5\"\n")
+		else:
+			#violet
+			f.write("\t\t\tfill \"#fc5cff\"\n")
 		
 		f.write("\t\t\tw 40.0000\n")
 		f.write("\t\t\th 40.0000\n")
@@ -464,6 +494,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 			
 			load = edge_load(i, edge_list[i][j], call_routes)
 			
+			"""
 			if load < 10:
 				#green
 				f.write("\t\t\tfill \"#CCFF99\"\n")
@@ -479,6 +510,35 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 			else:
 				#violet
 				f.write("\t\t\tfill \"#FF99FF\"\n")
+			"""
+			
+			if adj_list[i].load < 5:
+				#green
+				f.write("\t\t\tfill \"#abff5c\"\n")
+			elif adj_list[i].load < 10:
+				#green2
+				f.write("\t\t\tfill \"#d3ff5c\"\n")
+			elif adj_list[i].load < 15:
+				#yellow
+				f.write("\t\t\tfill \"#ffff5c\"\n")
+			elif adj_list[i].load < 20:
+				#yellow2
+				f.write("\t\t\tfill \"#ffdc5c\"\n")
+			elif adj_list[i].load < 25:
+				#orange
+				f.write("\t\t\tfill \"#ffb65c\"\n")
+			elif adj_list[i].load < 30:
+				#orange2
+				f.write("\t\t\tfill \"#ff855c\"\n")
+			elif adj_list[i].load < 35:
+				#red
+				f.write("\t\t\tfill \"#ff5c5c\"\n")
+			elif adj_list[i].load < 40:
+				#pink
+				f.write("\t\t\tfill \"#ff5ca5\"\n")
+			else:
+				#violet
+				f.write("\t\t\tfill \"#fc5cff\"\n")
 			
 			f.write("\t\t]\n")
 			f.write("\t]\n")
