@@ -89,10 +89,10 @@ def main():
 	call_prob = 0.9
 	call_prob_2 = 0.5
 	
-	f_lost = open("ant-lost.txt", 'w')
+	f_lost = open("bfs-lost.txt", 'w')
 	f_pop = open("ant-pop.csv", 'w')
 	
-	for i in range(30001): #10001
+	for i in range(10001): #10001
 		#print lost_call_list
 		"""
 		if i % 100 == 0:
@@ -120,7 +120,7 @@ def main():
 			while dest == source:
 				dest = random.randint(0, len(adj_list) - 1)
 			
-			result = route_call(source, dest, adj_list)
+			result = bfs(source, dest, adj_list)
 			if result:
 				successful_call_list.append(call[0:2])
 				call_list.append(call[0:2])
@@ -142,7 +142,7 @@ def main():
 				while dest == source:
 					dest = random.randint(0, len(adj_list) - 1)
 				
-				result = route_call(source, dest, adj_list)
+				result = bfs(source, dest, adj_list)
 				if result:
 					successful_call_list.append(call[0:2])
 					call_list.append(call[0:2])
@@ -416,7 +416,7 @@ def edge_load(a, b, call_routes):
 	return load
 
 def graph_out(adj_list, edge_list, coordinates, call_routes, t):
-	f = open("gif/graph-" + str(t) + "t.gml", 'w')
+	f = open("gif-bfs/graph-" + str(t) + "t.gml", 'w')
 	f.write("graph [\n")
 	i = 0
 	while i < len(adj_list):
@@ -548,7 +548,7 @@ def graph_out(adj_list, edge_list, coordinates, call_routes, t):
 	
 	f.write("]")
 	f.close()
-	print("Wrote to gif/graph-" + str(t) + "t.gml!")
+	print("Wrote to gif-bfs/graph-" + str(t) + "t.gml!")
 
 if __name__ == "__main__":
 	main()
