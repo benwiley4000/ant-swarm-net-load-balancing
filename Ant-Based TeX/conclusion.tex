@@ -1,0 +1,7 @@
+
+\section{Conclusions}
+\label{sec:concl}
+
+The ant-based algorithm performs much better than breadth-first search, but does not perform as well as in the results found by Schoonderwoerd et al. However, Dijkstra’s Algorithm outperforms both our implementation of the ant-based algorithm (by nearly a factor of 50) as well as that implemented by Schooderwoerd et al. (by close to a factor of 20). Because of this, Dijkstra’s Algorithm seems to be the best choice to load balance networks (ignoring considerations of time complexity).\\
+
+There are three extensions to this algorithm we would like to explore in the future. First, we would like to test this algorithm on other network topologies. Secondly, implementing a call frequency table to allow specific source nodes to call certain destination nodes more often than others would render a more realistic simulation of how calls are generally placed. Finally, we think it would be interesting to try the same experiment with non-uniform maximum node capacities.
