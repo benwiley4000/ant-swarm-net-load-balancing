@@ -9,7 +9,7 @@ By [Ben Wiley](https://github.com/benwiley4000) and [Tommy Rhodes](https://githu
 The purpose of this project is to implement a swarm intelligence
 algorithm in order to solve load balancing in
 communications networks. We aim to reproduce the experiments
-of Schoonderwoerd et al., and compare their
+of [Schoonderwoerd et al.](AntBasedLoadBalancing.pdf), and compare their
 decentralized call routing algorithms performance with
 routing using a shortest path (breadth-first search) algorithm
 and a minimum-weight algorithm (Dijkstras
