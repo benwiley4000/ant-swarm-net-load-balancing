@@ -24,7 +24,7 @@ Dijkstra performed best, followed by the ant-based
 algorithm and then breadth-first search.
 
 ### Running
-```python
+```sh
 python client.py
 ```
 [client.py](client.py) outputs [gml files](gml-technical-report.pdf) representing networking loads across a series of ticks as a breadth-first-search (BFS) algorithm is used to distribute network signals. The gml files can be rendered as colored graphs using [Cytoscape](http://www.cytoscape.org/). Dijkstra's algorithm our our ant-based balancing algorithm can be used instead by changing comments in the file.
