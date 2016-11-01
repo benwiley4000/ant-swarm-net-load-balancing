@@ -33,6 +33,9 @@ If this all sounds esoteric and hard to follow, it's because it is. If you just 
 
 ### [View paper](Ant-Based TeX/main.pdf)
 
+### [View poster](poster.jpg)
+Presented at May 6, 2015 Davidson College Math & Science Poster Fair
+
 ### View GIFS of load balancing in action
 * [Ant swarm](ant-animation.gif)
 * [Breadth-First Search](bfs-animation.gif)
